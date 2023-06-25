@@ -1,0 +1,206 @@
+{
+    "eventKey": "pr:reviewer:approved",
+    "date": "2022-09-02T09:23:01+0000",
+    "actor": {
+        "name": "sample",
+        "emailAddress": "mail@example.com",
+        "id": 86045,
+        "displayName": "sample",
+        "active": true,
+        "slug": "sample",
+        "type": "NORMAL",
+        "links": {
+            "self": [
+                {
+                    "href": "https://bitbucket.org/bitbucket/users/sample"
+                }
+            ]
+        }
+    },
+    "pullRequest": {
+        "id": 1,
+        "version": 5,
+        "title": "test 3",
+        "description": "test comentario",
+        "state": "OPEN",
+        "open": true,
+        "closed": false,
+        "createdDate": 1662110298743,
+        "updatedDate": 1662110446707,
+        "fromRef": {
+            "id": "refs/heads/test-bot",
+            "displayId": "test-bot",
+            "latestCommit": "394d651d61a7f2d8d6dde5ececd0aafa2b2140ab",
+            "type": "BRANCH",
+            "repository": {
+                "slug": "REPOSITORY",
+                "id": 221481,
+                "name": "REPOSITORY",
+                "description": "description text",
+                "hierarchyId": "c2e575e623722f5bfdf6",
+                "scmId": "git",
+                "state": "AVAILABLE",
+                "statusMessage": "Available",
+                "forkable": true,
+                "project": {
+                    "key": "GFP",
+                    "id": 37668,
+                    "name": "REPO",
+                    "public": false,
+                    "type": "NORMAL",
+                    "links": {
+                        "self": [
+                            {
+                                "href": "https://bitbucket.org/bitbucket/projects/KEY"
+                            }
+                        ]
+                    }
+                },
+                "public": false,
+                "links": {
+                    "clone": [
+                        {
+                            "href": "ssh://git@bitbucket.org:7999/gfp/REPOSITORY.git",
+                            "name": "ssh"
+                        },
+                        {
+                            "href": "https://bitbucket.org/bitbucket/scm/gfp/REPOSITORY.git",
+                            "name": "http"
+                        }
+                    ],
+                    "self": [
+                        {
+                            "href": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/browse"
+                        }
+                    ]
+                }
+            }
+        },
+        "toRef": {
+            "id": "refs/heads/master",
+            "displayId": "master",
+            "latestCommit": "82ec9710156b474292ce3dfd040591850392bd21",
+            "type": "BRANCH",
+            "repository": {
+                "slug": "REPOSITORY",
+                "id": 221481,
+                "name": "REPOSITORY",
+                "description": "description text",
+                "hierarchyId": "c2e575e623722f5bfdf6",
+                "scmId": "git",
+                "state": "AVAILABLE",
+                "statusMessage": "Available",
+                "forkable": true,
+                "project": {
+                    "key": "GFP",
+                    "id": 37668,
+                    "name": "REPO",
+                    "public": false,
+                    "type": "NORMAL",
+                    "links": {
+                        "self": [
+                            {
+                                "href": "https://bitbucket.org/bitbucket/projects/KEY"
+                            }
+                        ]
+                    }
+                },
+                "public": false,
+                "links": {
+                    "clone": [
+                        {
+                            "href": "ssh://git@bitbucket.org:7999/gfp/REPOSITORY.git",
+                            "name": "ssh"
+                        },
+                        {
+                            "href": "https://bitbucket.org/bitbucket/scm/gfp/REPOSITORY.git",
+                            "name": "http"
+                        }
+                    ],
+                    "self": [
+                        {
+                            "href": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/browse"
+                        }
+                    ]
+                }
+            }
+        },
+        "locked": false,
+        "author": {
+            "user": {
+                "name": "sample",
+                "emailAddress": "mail@example.com",
+                "id": 50508,
+                "displayName": "sample",
+                "active": true,
+                "slug": "sample",
+                "type": "NORMAL",
+                "links": {
+                    "self": [
+                        {
+                            "href": "https://bitbucket.org/bitbucket/users/sample"
+                        }
+                    ]
+                }
+            },
+            "role": "AUTHOR",
+            "approved": false,
+            "status": "UNAPPROVED"
+        },
+        "reviewers": [
+            {
+                "user": {
+                    "name": "sample",
+                    "emailAddress": "mail@example.com",
+                    "id": 86045,
+                    "displayName": "sample",
+                    "active": true,
+                    "slug": "sample",
+                    "type": "NORMAL",
+                    "links": {
+                        "self": [
+                            {
+                                "href": "https://bitbucket.org/bitbucket/users/sample"
+                            }
+                        ]
+                    }
+                },
+                "lastReviewedCommit": "394d651d61a7f2d8d6dde5ececd0aafa2b2140ab",
+                "role": "REVIEWER",
+                "approved": true,
+                "status": "APPROVED"
+            }
+        ],
+        "participants": [],
+        "links": {
+            "self": [
+                {
+                    "href": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/pull-requests/1"
+                }
+            ]
+        }
+    },
+    "participant": {
+        "user": {
+            "name": "sample",
+            "emailAddress": "mail@example.com",
+            "id": 86045,
+            "displayName": "sample",
+            "active": true,
+            "slug": "sample",
+            "type": "NORMAL",
+            "links": {
+                "self": [
+                    {
+                        "href": "https://bitbucket.org/bitbucket/users/sample"
+                    }
+                ]
+            }
+        },
+        "lastReviewedCommit": "394d651d61a7f2d8d6dde5ececd0aafa2b2140ab",
+        "role": "REVIEWER",
+        "approved": true,
+        "status": "APPROVED"
+    },
+    "previousStatus": "UNAPPROVED"
+}
