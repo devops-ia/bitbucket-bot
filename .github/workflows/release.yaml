@@ -31,7 +31,7 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64
-          tags: ${{ env.USER }}/${{ env.REPO }}:${{ steps.appVersion.outputs.version }}
+          tags: ${{ env.USER }}/${{ env.REPO }}:${{ steps.appVersion.outputs.version }},${{ env.USER }}/${{ env.REPO }}:latest
 
       - name: Update Docker registry description
         uses: peter-evans/dockerhub-description@v3
