@@ -1,4 +1,4 @@
-FROM python:3.8.3-slim
+FROM python:3.12.4-slim
 
 # LABELS
 LABEL maintainer="Iván Alejandro Marugán <hello@ialejandro.rocks>"                               \
