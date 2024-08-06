@@ -17,7 +17,9 @@ updates:
   - enhancement
   - dependency-management
 - package-ecosystem: pip
-  directory: "/"
+  directories:
+  - "/"
+  - "/app"
   schedule:
     interval: monthly
   open-pull-requests-limit: 10
