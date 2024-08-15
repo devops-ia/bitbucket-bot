@@ -1,0 +1,20 @@
+sources:
+  python:
+    kind: dockerimage
+    spec:
+      image: python
+      architecture: linux/amd64
+      versionFilter:
+        kind: semver
+        pattern: "~3"
+conditions: {}
+targets:
+  update-python-tag:
+    name: "Update the value of ARG PYTHON_VERSION in the Dockerfile"
+    sourceid: python
+    kind: dockerfile
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: "ARG"
+        matcher: "PYTHON_VERSION"

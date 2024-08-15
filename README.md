@@ -47,7 +47,3 @@ docker run --name <container-name>    \
 ```
 
 * [Bitbucket playloads](https://confluence.atlassian.com/bitbucketserver0721/event-payload-1115665959.html?utm_campaign=in-app-help&utm_medium=in-app-help&utm_source=stash#Eventpayload-pullrequest)
-
-## Contributing
-
-We're happy if you want open and issue or a new feature :)

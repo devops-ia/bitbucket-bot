@@ -1,0 +1,78 @@
+name: Check bitbucket-bot new release
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  check-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Get current tag
+        id: current_release
+        run: |
+          # python_release
+          python_current_release=$(grep "ARG PYTHON_VERSION" Dockerfile | cut -d '=' -f 2)
+          echo "python_current_release=$python_current_release" >> $GITHUB_OUTPUT
+
+      - name: Install updatecli
+        uses: updatecli/updatecli-action@v2
+
+      - name: Update dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+        run: |
+          updatecli apply --config .github/updatecli/dependencies.yaml --commit=false
+
+      - name: Get latest tag
+        id: latest_release
+        run: |
+          # python_release
+          python_latest_release=$(grep "ARG AWSCLI_VERSION" Dockerfile | cut -d '=' -f 2)
+          echo "python_latest_release=$python_latest_release" >> $GITHUB_OUTPUT
+
+          # complete_tag
+          echo "complete_release=python$python_latest_release" >> $GITHUB_OUTPUT
+
+      - name: Check if exists changes
+        id: check_changes
+        env:
+          python_current_release: ${{ steps.current_release.outputs.python_current_release }}
+          python_latest_release: ${{ steps.latest_release.outputs.python_latest_release }}
+        run: |
+          # python
+          if [ "$python_current_release" != "$python_latest_release" ]; then
+              body+="Python version:\n"
+              body+="  - :information_source: Current: \`$python_current_release\`\n"
+              body+="  - :up: Upgrade: \`$python_latest_release\`\n"
+
+              echo "release_changed=true" >> $GITHUB_OUTPUT
+          fi
+
+          echo -e "$body" > pr-output.log
+
+      - name: Create PR changes
+        if: steps.check_changes.outputs.release_changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.PAT_GITHUB }}
+          commit-message: "feat: new bitbucket-bot version ${{ steps.latest_release.outputs.complete_release }}"
+          signoff: false
+          branch: feat/upgrade-bitbucket-bot-${{ steps.latest_release.outputs.complete_release }}
+          delete-branch: true
+          title: '[bitbucket-bot] new release: ${{ steps.latest_release.outputs.complete_release }}'
+          body-path: pr-output.log
+          labels: |
+            auto-pr-bump-version
