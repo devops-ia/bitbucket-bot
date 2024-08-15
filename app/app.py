@@ -1,6 +1,8 @@
+import html
 import json
 import os
 import requests
+
 from flask import Flask, request
 
 
@@ -188,12 +190,12 @@ def main():
     token = os.environ.get('TOKEN')
 
     if request.args['token']!= token:
-        exit(1)
+        return "Invalid token", 403
 
     event = request.get_json()
 
     if not event:
-        return "event empty"
+        return "event empty", 400
 
     message = Message(url, event)
     if (event['eventKey'] == 'pr:opened' or event['eventKey'] == 'pr:merged' or event['eventKey'] == 'pr:declined'):
@@ -208,7 +210,8 @@ def main():
         comment = message.pr_approved(event)
         r = message.send_message(comment)
 
-    return r
+    # Mitigate XSS
+    return html.escape(r)
 
 
 if __name__ == "__main__":

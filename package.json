@@ -1,0 +1,14 @@
+{
+  "name": "bitbucket-bot",
+  "version": "v1.0.0",
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "repositoryUrl": "https://github.com/devops-ia/bitbucket-bot.git",
+    "plugins": [
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github"
+    ]
+  }
+}
