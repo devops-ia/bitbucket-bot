@@ -165,11 +165,15 @@ class Message():
         return base_template
 
 
-    def send_message(self, message={}):
+    def send_message(self, message=None):
         '''
         Prepare message and send to bot
 
         '''
+        # pylint fix W0102 (dangerous-default-value)
+        if message is None:
+            message = {}
+
         # prepare final message
         bot_message = self.prepare_template(message)
 
