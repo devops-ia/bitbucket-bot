@@ -1,3 +1,7 @@
+"""
+Bitbucket Bot to integrate Bitbucket's webhook with Google Chat (Spaces)
+"""
+
 import html
 import json
 import os
@@ -175,6 +179,7 @@ class Message():
             url=self.url,
             headers=headers,
             data=json.dumps(bot_message),
+            timeout=10
         )
 
         return response.text
@@ -186,10 +191,11 @@ def main():
     Main function to deploy
 
     '''
-    url   = os.environ.get('URL', 'http://example.com')
+    url = os.environ.get('URL', 'http://example.com')
     token = os.environ.get('TOKEN')
+    r = {}
 
-    if request.args['token']!= token:
+    if request.args['token'] != token:
         return "Invalid token", 403
 
     event = request.get_json()
@@ -200,18 +206,17 @@ def main():
     message = Message(url, event)
     if (event['eventKey'] == 'pr:opened' or event['eventKey'] == 'pr:merged' or event['eventKey'] == 'pr:declined'):
         r = message.send_message()
-    elif (event['eventKey'] == 'pr:modified'):
+    elif event['eventKey'] == 'pr:modified':
         r = comment = message.pr_modified(event)
         message.send_message(comment)
-    elif (event['eventKey'] == 'pr:comment:added'):
+    elif event['eventKey'] == 'pr:comment:added':
         comment = message.pr_comment_add(event)
         r = message.send_message(comment)
     elif (event['eventKey'] == 'pr:reviewer:needs_work' or event['eventKey'] == 'pr:reviewer:approved'):
         comment = message.pr_approved(event)
         r = message.send_message(comment)
 
-    # Mitigate XSS
-    return html.escape(r)
+    return html.escape(json.dumps(r))
 
 
 if __name__ == "__main__":
