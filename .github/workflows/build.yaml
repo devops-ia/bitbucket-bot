@@ -34,16 +34,6 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v4
-        id: semantic_release
-        with:
-          dry_run: true
-          branch: main
-          tag_format: ${version}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: "Set Docker metadata"
         id: meta
         uses: docker/metadata-action@v5
@@ -56,8 +46,10 @@ jobs:
             org.opencontainers.image.title=Bitbucket Bot
             org.opencontainers.image.description=Bitbucket Bot to Google Chat (Spaces)
             org.opencontainers.image.vendor=DevOps IA
+          flavor: |
+            latest=auto
           tags: |
-            type=raw,value=${{ github.ref_name }}
+            type=semver,pattern={{raw}}
             type=sha,enable=false
 
       - name: Set up QEMU

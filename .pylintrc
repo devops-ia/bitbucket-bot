@@ -1,0 +1,5 @@
+[pylint]
+max-line-length=120
+disable=no-value-for-parameter,no-member
+ignore=.git,venv,tests/__pycache__,migrations
+max-attributes=10

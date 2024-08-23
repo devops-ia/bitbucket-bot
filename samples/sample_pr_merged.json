@@ -1,0 +1,190 @@
+{
+    "actor": {
+        "active": true,
+        "displayName": "sample",
+        "emailAddress": "mail@example.com",
+        "id": 50508,
+        "links": {
+            "self": [
+                {
+                    "href": "https://bitbucket.org/bitbucket/users/sample"
+                }
+            ]
+        },
+        "name": "sample",
+        "slug": "sample",
+        "type": "NORMAL"
+    },
+    "date": "2022-09-02T09:26:09+0000",
+    "eventKey": "pr:merged",
+    "pullRequest": {
+        "author": {
+            "approved": false,
+            "role": "AUTHOR",
+            "status": "UNAPPROVED",
+            "user": {
+                "active": true,
+                "displayName": "sample",
+                "emailAddress": "mail@example.com",
+                "id": 50508,
+                "links": {
+                    "self": [
+                        {
+                            "href": "https://bitbucket.org/bitbucket/users/sample"
+                        }
+                    ]
+                },
+                "name": "sample",
+                "slug": "sample",
+                "type": "NORMAL"
+            }
+        },
+        "closed": true,
+        "closedDate": 1662110767342,
+        "createdDate": 1662110298743,
+        "description": "test comentario",
+        "fromRef": {
+            "displayId": "test-bot",
+            "id": "refs/heads/test-bot",
+            "latestCommit": "394d651d61a7f2d8d6dde5ececd0aafa2b2140ab",
+            "repository": {
+                "description": "description text",
+                "forkable": true,
+                "hierarchyId": "c2e575e623722f5bfdf6",
+                "id": 221481,
+                "links": {
+                    "clone": [
+                        {
+                            "href": "ssh://git@bitbucket.org:7999/gfp/REPOSITORY.git",
+                            "name": "ssh"
+                        },
+                        {
+                            "href": "https://bitbucket.org/bitbucket/scm/gfp/REPOSITORY.git",
+                            "name": "http"
+                        }
+                    ],
+                    "self": [
+                        {
+                            "href": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/browse"
+                        }
+                    ]
+                },
+                "name": "REPOSITORY",
+                "project": {
+                    "id": 37668,
+                    "key": "GCP_FUSION_CORE",
+                    "links": {
+                        "self": [
+                            {
+                                "href": "https://bitbucket.org/bitbucket/projects/KEY"
+                            }
+                        ]
+                    },
+                    "name": "REPO",
+                    "public": false,
+                    "type": "NORMAL"
+                },
+                "public": false,
+                "scmId": "git",
+                "slug": "REPOSITORY",
+                "state": "AVAILABLE",
+                "statusMessage": "Available"
+            },
+            "type": "BRANCH"
+        },
+        "id": 1,
+        "links": {
+            "self": [
+                {
+                    "href": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/pull-requests/1"
+                }
+            ]
+        },
+        "locked": false,
+        "open": false,
+        "participants": [],
+        "properties": {
+            "mergeCommit": {
+                "displayId": "2d1dfe55374",
+                "id": "2d1dfe553744c5a1f4a64d99451d6b62450b58ab"
+            }
+        },
+        "reviewers": [
+            {
+                "approved": true,
+                "lastReviewedCommit": "394d651d61a7f2d8d6dde5ececd0aafa2b2140ab",
+                "role": "REVIEWER",
+                "status": "APPROVED",
+                "user": {
+                    "active": true,
+                    "displayName": "sample",
+                    "emailAddress": "mail@example.com",
+                    "id": 86045,
+                    "links": {
+                        "self": [
+                            {
+                                "href": "https://bitbucket.org/bitbucket/users/sample"
+                            }
+                        ]
+                    },
+                    "name": "sample",
+                    "slug": "sample",
+                    "type": "NORMAL"
+                }
+            }
+        ],
+        "state": "MERGED",
+        "title": "test 3",
+        "toRef": {
+            "displayId": "master",
+            "id": "refs/heads/master",
+            "latestCommit": "82ec9710156b474292ce3dfd040591850392bd21",
+            "repository": {
+                "description": "description text",
+                "forkable": true,
+                "hierarchyId": "c2e575e623722f5bfdf6",
+                "id": 221481,
+                "links": {
+                    "clone": [
+                        {
+                            "href": "ssh://git@bitbucket.org:7999/gfp/REPOSITORY.git",
+                            "name": "ssh"
+                        },
+                        {
+                            "href": "https://bitbucket.org/bitbucket/scm/gfp/REPOSITORY.git",
+                            "name": "http"
+                        }
+                    ],
+                    "self": [
+                        {
+                            "href": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/browse"
+                        }
+                    ]
+                },
+                "name": "REPOSITORY",
+                "project": {
+                    "id": 37668,
+                    "key": "GFP",
+                    "links": {
+                        "self": [
+                            {
+                                "href": "https://bitbucket.org/bitbucket/projects/KEY"
+                            }
+                        ]
+                    },
+                    "name": "REPO",
+                    "public": false,
+                    "type": "NORMAL"
+                },
+                "public": false,
+                "scmId": "git",
+                "slug": "REPOSITORY",
+                "state": "AVAILABLE",
+                "statusMessage": "Available"
+            },
+            "type": "BRANCH"
+        },
+        "updatedDate": 1662110767342,
+        "version": 7
+    }
+}
