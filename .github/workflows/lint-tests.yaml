@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
-  push:
     paths:
       - app/**
       - tests/**
@@ -39,16 +38,12 @@ jobs:
       - name: Install dependencies
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
-          pipenv install --deploy --dev
+          pipenv install --system --deploy --dev
 
       - name: pylint
         run: |
-          pipenv run pylint app
+          pylint app
 
-      - name: pytest
-        uses: pavelzw/pytest-action@v2
-        with:
-          verbose: false
-          emoji: false
-          job-summary: true
-          report-title: 'pylint report'
+      - name: pylint
+        run: |
+          pytest
