@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 flask = "==3.0.*"
-gunicorn = "==22.0.*"
+gunicorn = "==23.0.*"
 markupsafe = "==2.1.5"
 requests = "==2.32.*"
 
