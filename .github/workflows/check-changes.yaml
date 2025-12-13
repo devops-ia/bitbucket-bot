@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           fetch-depth: 0
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3.7.0
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
 
       - name: Get current tag
         id: current_release
@@ -28,7 +28,7 @@ jobs:
           echo "python_current_release=$python_current_release" >> $GITHUB_OUTPUT
 
       - name: Install updatecli
-        uses: updatecli/updatecli-action@v2
+        uses: updatecli/updatecli-action@9a21b6911fe58865c8346d4fde3470010f49bf31 # v2.97.0
 
       - name: Update dependencies
         env:
@@ -65,7 +65,7 @@ jobs:
 
       - name: Create PR changes
         if: steps.check_changes.outputs.release_changed == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
         with:
           token: ${{ secrets.PAT_GITHUB }}
           commit-message: "feat: new bitbucket-bot version ${{ steps.latest_release.outputs.complete_release }}"
