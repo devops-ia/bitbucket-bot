@@ -5,9 +5,9 @@ name = "pypi"
 
 [packages]
 flask = "==3.1.*"
-gunicorn = "==25.3.*"
+gunicorn = "==26.0.*"
 markupsafe = "==3.0.3"
-requests = "==2.33.*"
+requests = "==2.34.*"
 
 [dev-packages]
 pytest = "==9.0.*"
