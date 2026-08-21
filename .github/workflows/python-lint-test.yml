@@ -4,10 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
-    paths:
-      - app/**
-      - tests/**
-      - Pipfile*
 
 jobs:
   release:
