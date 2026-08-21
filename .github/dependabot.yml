@@ -1,40 +1,67 @@
 version: 2
 updates:
-- package-ecosystem: github-actions
-  directory: "/"
-  schedule:
-    interval: monthly
-  open-pull-requests-limit: 10
-  labels:
-  - enhancement
-  - dependency-management
-  groups:
-    github-actions:
-      patterns:
-        - "*"
-- package-ecosystem: docker
-  directory: "/"
-  schedule:
-    interval: monthly
-  open-pull-requests-limit: 10
-  labels:
-  - enhancement
-  - dependency-management
-  groups:
-    docker:
-      patterns:
-        - "*"
-- package-ecosystem: pip
-  directories:
-  - "/"
-  - "/app"
-  schedule:
-    interval: monthly
-  open-pull-requests-limit: 10
-  labels:
-  - enhancement
-  - dependency-management
-  groups:
-    pip:
-      patterns:
-        - "*"
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
+    labels:
+      - enhancement
+      - dependency-management
+    assignees:
+      - ialejandro
+      - amartingarcia
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: chore
+      include: scope
+    rebase-strategy: auto
+    pull-request-branch-name:
+      separator: "-"
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
+    labels:
+      - enhancement
+      - dependency-management
+    assignees:
+      - ialejandro
+      - amartingarcia
+    groups:
+      docker:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: fix
+      include: scope
+    rebase-strategy: auto
+    pull-request-branch-name:
+      separator: "-"
+
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
+    labels:
+      - enhancement
+      - dependency-management
+    assignees:
+      - ialejandro
+      - amartingarcia
+    groups:
+      pip:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: fix
+      include: scope
+    rebase-strategy: auto
+    pull-request-branch-name:
+      separator: "-"
