@@ -30,23 +30,22 @@ class Message():
         self.url           = url
 
 
+    @staticmethod
+    def detail(icon, label, text):
+        '''
+        Section with one decoratedText widget (icon is a knownIcon)
+
+        '''
+        return {"widgets": [{"decoratedText": {"startIcon": {"knownIcon": icon}, "topLabel": label, "text": text}}]}
+
+
     def pr_approved(self, event):
         '''
         Add approved comment with properly template
 
         '''
-        comment_template =  {
-                              "widgets": [
-                                {
-                                  "keyValue": {
-                                   "icon": "STAR",
-                                   "topLabel": f"Review by {event['participant']['user']['name']}",
-                                   "content": str(event['participant']['status'])
-                                  }
-                                }
-                              ]
-                            }
-        return comment_template
+        return self.detail("STAR", f"Review by {event['participant']['user']['name']}",
+                           str(event['participant']['status']))
 
 
     def pr_modified(self, event):
@@ -54,20 +53,9 @@ class Message():
         Add modified function with properly template
 
         '''
-        comment_template =  {
-                              "widgets": [
-                                {
-                                  "keyValue": {
-                                   "icon": "DESCRIPTION",
-                                   "topLabel": f"Modified by {event['actor']['name']}",
-                                   "content": str(f"""<b>Previous title</b>: {event['previousTitle']}
-                                     <b>Previous description</b>: {event['previousDescription']}
-                                   """)
-                                  }
-                                }
-                              ]
-                            }
-        return comment_template
+        return self.detail("DESCRIPTION", f"Modified by {event['actor']['name']}",
+                           f"<b>Previous title</b>: {event['previousTitle']}<br>"
+                           f"<b>Previous description</b>: {event['previousDescription']}")
 
 
     def pr_comment_add(self, event):
@@ -75,18 +63,8 @@ class Message():
         Add comment function with properly template
 
         '''
-        comment_template =  {
-                              "widgets": [
-                                {
-                                  "keyValue": {
-                                   "icon": "DESCRIPTION",
-                                   "topLabel": f"Comment by {event['comment']['author']['name']}",
-                                   "content": str(event['comment']['text'])
-                                  }
-                                }
-                              ]
-                            }
-        return comment_template
+        return self.detail("DESCRIPTION", f"Comment by {event['comment']['author']['name']}",
+                           str(event['comment']['text']))
 
 
     def prepare_template(self, message):
@@ -94,75 +72,47 @@ class Message():
         Prepare final template before send
 
         '''
-        base_template = {
-                          "cards": [
-                            {
-                              "header": {
-                                "title": f"{self.pr_event_key} | ({self.pr_project}) {self.pr_repository}",
-                                "imageUrl": "https://cdn-icons-png.flaticon.com/512/6125/6125001.png"
-                              },
-                              "sections": [
-                                {
-                                  "widgets": [
+        def meta(icon, label, text):
+            return {"decoratedText": {"startIcon": icon, "topLabel": label, "text": str(text)}}
+
+        card = {
+            "header": {
+                "title": f"{self.pr_event_key} | ({self.pr_project}) {self.pr_repository}",
+                "imageUrl": "https://cdn-icons-png.flaticon.com/512/6125/6125001.png"
+            },
+            "sections": [
+                {
+                    "widgets": [
+                        meta({"knownIcon": "PERSON"}, "author", self.author),
+                        meta({"iconUrl": "https://cdn-icons-png.flaticon.com/512/7201/7201872.png"},
+                             "Pull Request", self.pr_title),
+                        meta({"iconUrl": "https://cdn-icons-png.flaticon.com/512/6577/6577243.png"},
+                             "ID Pull Request", f"{self.pr_id} (version: {self.pr_version})"),
+                        meta({"iconUrl": "https://cdn-icons-png.flaticon.com/512/1721/1721936.png"},
+                             "Status", self.pr_state)
+                    ]
+                },
+                {
+                    "widgets": [
+                        {
+                            "buttonList": {
+                                "buttons": [
                                     {
-                                      "keyValue": {
-                                        "icon": "PERSON",
-                                        "topLabel": "author",
-                                        "content": str(self.author)
-                                      }
-                                    },
-                                    {
-                                      "keyValue": {
-                                        "iconUrl": "https://cdn-icons-png.flaticon.com/512/7201/7201872.png",
-                                        "topLabel": "Pull Request",
-                                        "content": str(f"{self.pr_title}")
-                                        }
-                                    },
-                                    {
-                                      "keyValue": {
-                                        "iconUrl": "https://cdn-icons-png.flaticon.com/512/6577/6577243.png",
-                                        "topLabel": "ID Pull Request",
-                                        "content": str(f"{self.pr_id} (version: {self.pr_version})")
-                                        }
-                                    },
-                                    {
-                                      "keyValue": {
-                                        "iconUrl": "https://cdn-icons-png.flaticon.com/512/1721/1721936.png",
-                                        "topLabel": "Status",
-                                        "content": str(self.pr_state)
-                                      }
+                                        "text": "Review PR",
+                                        "onClick": {"openLink": {"url": str(self.pr_link)}}
                                     }
-                                  ]
-                                },
-                                {
-                                  "widgets": [
-                                    {
-                                      "buttons": [
-                                        {
-                                          "textButton": {
-                                            "text": "Review PR",
-                                            "onClick": {
-                                              "openLink": {
-                                                "url": str(self.pr_link)
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
+                                ]
                             }
-                          ]
                         }
+                    ]
+                }
+            ]
+        }
 
         if message:
-            l_sections = base_template["cards"][0]["sections"]
-            l_sections.insert(1, message)
-            base_template["cards"][0]["sections"] = l_sections
+            card["sections"].insert(1, message)
 
-        return base_template
+        return {"cardsV2": [{"cardId": f"pr-{self.pr_id}", "card": card}]}
 
 
     def send_message(self, message=None):
