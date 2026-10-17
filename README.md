@@ -29,6 +29,10 @@ docker run --name <container-name>    \
 
 Refer to the [Bitbucket payload documentation](https://confluence.atlassian.com/bitbucketserver0721/event-payload-1115665959.html?utm_campaign=in-app-help&utm_medium=in-app-help&utm_source=stash#Eventpayload-pullrequest) for details on the data structure of events.
 
+## Migration: Cards v2
+
+The bot now sends the Google Chat message in the Cards v2 format (`cardsV2`, `decoratedText`, `buttonList`) instead of the deprecated `cards` format. Anything that reads or filters the payload sent to Google Chat must look for `cardsV2` (each card has `cardId` `pr-<PR id>`). Routes, token, supported events and environment variables are unchanged.
+
 ## Request Payload
 
 ### Payload example
@@ -71,9 +75,9 @@ Accept-Encoding: gzip, deflate
 Accept: */*
 Connection: keep-alive
 Content-Type: application/json; charset=UTF-8
-Content-Length: 958
+Content-Length: 1083
 
-{"cards": [{"header": {"title": "pr:comment:added | (GFP) REPOSITORY", "imageUrl": "https://cdn-icons-png.flaticon.com/512/6125/6125001.png"}, "sections": [{"widgets": [{"keyValue": {"icon": "PERSON", "topLabel": "author", "content": "mail@example.com"}}, {"keyValue": {"iconUrl": "https://cdn-icons-png.flaticon.com/512/7201/7201872.png", "topLabel": "Pull Request", "content": "test 3"}}, {"keyValue": {"iconUrl": "https://cdn-icons-png.flaticon.com/512/6577/6577243.png", "topLabel": "ID Pull Request", "content": "1 (version: 5)"}}, {"keyValue": {"iconUrl": "https://cdn-icons-png.flaticon.com/512/1721/1721936.png", "topLabel": "Status", "content": "OPEN"}}]}, {"widgets": [{"keyValue": {"icon": "DESCRIPTION", "topLabel": "Comment by sample", "content": "Test"}}]}, {"widgets": [{"buttons": [{"textButton": {"text": "Review PR", "onClick": {"openLink": {"url": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/pull-requests/1"}}}}]}]}]}]}
+{"cardsV2": [{"cardId": "pr-1", "card": {"header": {"title": "pr:comment:added | (GFP) REPOSITORY", "imageUrl": "https://cdn-icons-png.flaticon.com/512/6125/6125001.png"}, "sections": [{"widgets": [{"decoratedText": {"startIcon": {"knownIcon": "PERSON"}, "topLabel": "author", "text": "mail@example.com"}}, {"decoratedText": {"startIcon": {"iconUrl": "https://cdn-icons-png.flaticon.com/512/7201/7201872.png"}, "topLabel": "Pull Request", "text": "test 3"}}, {"decoratedText": {"startIcon": {"iconUrl": "https://cdn-icons-png.flaticon.com/512/6577/6577243.png"}, "topLabel": "ID Pull Request", "text": "1 (version: 5)"}}, {"decoratedText": {"startIcon": {"iconUrl": "https://cdn-icons-png.flaticon.com/512/1721/1721936.png"}, "topLabel": "Status", "text": "OPEN"}}]}, {"widgets": [{"decoratedText": {"startIcon": {"knownIcon": "DESCRIPTION"}, "topLabel": "Comment by sample", "text": "Test"}}]}, {"widgets": [{"buttonList": {"buttons": [{"text": "Review PR", "onClick": {"openLink": {"url": "https://bitbucket.org/bitbucket/projects/KEY/repos/REPOSITORY/pull-requests/1"}}}]}}]}]}}]}
 
 ```
 
